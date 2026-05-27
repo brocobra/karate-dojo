@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DOJO — 空手道場</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+:root{
+  --black:#000;
+  --white:#f0f0fa;
+  --ghost:rgba(240,240,250,.1);
+  --ghost-border:rgba(240,240,250,.35);
+  --overlay:rgba(0,0,0,.55);
+  --vermillion:#CB410B;
+  --font-display:"Dela Gothic One","Noto Sans JP",sans-serif;
+  --font-body:"Noto Sans JP","Hiragino Sans",sans-serif;
+}
+
+body{
+  font-family:var(--font-body);
+  background:var(--black);color:var(--white);
+  line-break:strict;word-break:normal;line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+a{color:var(--white);text-decoration:none}
+a:hover{color:var(--vermillion)}
+
+/* ═══ NAV ═══ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;height:56px;
+  background:rgba(0,0,0,.4);
+  backdrop-filter:blur(4px);
+  transition:background .3s;
+}
+.nav.scrolled{background:rgba(0,0,0,.85)}
+.nav-brand{
+  font-family:var(--font-display);
+  font-size:.85rem;color:var(--white);
+  letter-spacing:.12em;
+}
+.nav-brand span{color:var(--vermillion)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{
+  font-family:var(--font-body);
+  font-size:.7rem;font-weight:700;
+  color:rgba(240,240,250,.6);
+  letter-spacing:.15em;text-transform:uppercase;
+  transition:color .3s;
+}
+.nav-links a:hover{color:var(--white)}
+.nav-toggle{
+  display:none;background:none;border:none;cursor:pointer;
+  color:var(--white);font-size:1.2rem;
+}
+
+/* ═══ SCENE (Full-viewport section) ═══ */
+.scene{
+  position:relative;
+  min-height:100vh;
+  display:flex;align-items:center;
+  padding:80px 48px;
+  overflow:hidden;
+}
+.scene::before{
+  content:"";position:absolute;inset:0;
+  background:var(--overlay);
+  z-index:1;
+}
+.scene-inner{position:relative;z-index:2;max-width:960px}
+
+/* ═══ KANJI WATERMARK ═══ */
+.kanji-mark{
+  position:absolute;
+  font-family:"Dela Gothic One",sans-serif;
+  font-size:clamp(12rem,30vw,28rem);
+  color:rgba(240,240,250,.03);
+  line-height:1;
+  pointer-events:none;
+  z-index:0;
+  user-select:none;
+}
+
+/* ═══ HERO ═══ */
+.hero{
+  background:url('karate.jpg') center/cover no-repeat;
+}
+.hero .kanji-mark{right:-5%;top:50%;transform:translateY(-50%)}
+.hero-label{
+  font-size:.6rem;font-weight:700;
+  color:rgba(240,240,250,.4);
+  letter-spacing:.3em;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(2.5rem,7vw,5rem);
+  line-height:1;
+  letter-spacing:.06em;
+  color:var(--white);
+  margin-bottom:12px;
+}
+.hero-sub{
+  font-size:.85rem;
+  color:rgba(240,240,250,.5);
+  max-width:480px;
+  margin-bottom:40px;
+  line-height:2;
+}
+
+/* ═══ GHOST BUTTON ═══ */
+.ghost{
+  display:inline-block;
+  padding:14px 36px;
+  font-family:var(--font-body);
+  font-size:.72rem;font-weight:700;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--white);
+  background:var(--ghost);
+  border:1px solid var(--ghost-border);
+  border-radius:32px;
+  transition:all .3s;
+}
+.ghost:hover{
+  background:rgba(240,240,250,.2);
+  color:var(--white);
+}
+.ghost--red{
+  background:rgba(203,65,11,.15);
+  border-color:rgba(203,65,11,.4);
+}
+.ghost--red:hover{background:rgba(203,65,11,.3)}
+
+/* ═══ SECTION LABELS ═══ */
+.scene-num{
+  font-size:.55rem;font-weight:700;
+  color:var(--vermillion);
+  letter-spacing:.3em;
+  margin-bottom:12px;
+}
+.scene-title{
+  font-family:var(--font-display);
+  font-size:clamp(1.8rem,4vw,3rem);
+  line-height:1.1;
+  letter-spacing:.04em;
+  color:var(--white);
+  margin-bottom:32px;
+}
+.scene-body{
+  font-size:.88rem;
+  color:rgba(240,240,250,.5);
+  max-width:560px;
+  line-height:2;
+}
+.scene-body strong{color:var(--white);font-weight:700}
+
+/* ═══ TRAINING SECTION ═══ */
+.training{
+  background:url('karate1.jpg') center/cover no-repeat;
+}
+.training .kanji-mark{left:-8%;top:30%}
+.training-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:48px 64px;margin-top:40px;
+}
+.training-item{}
+.training-item-title{
+  font-family:var(--font-display);
+  font-size:1rem;
+  letter-spacing:.06em;
+  margin-bottom:8px;
+}
+.training-item-title span{
+  color:var(--vermillion);font-size:.65rem;
+  margin-right:8px;letter-spacing:.15em;
+}
+.training-item-body{
+  font-size:.78rem;
+  color:rgba(240,240,250,.4);
+  line-height:1.8;
+}
+
+/* ═══ SCHEDULE ═══ */
+.schedule{
+  background:
+    radial-gradient(ellipse at 60% 40%,rgba(203,65,11,.03) 0%,transparent 40%),
+    #0a0a0a;
+}
+.schedule .kanji-mark{right:-10%;bottom:10%}
+.schedule-table{
+  margin-top:32px;
+  border-top:1px solid rgba(240,240,250,.08);
+}
+.schedule-row{
+  display:grid;grid-template-columns:120px 1fr 140px;
+  gap:16px;
+  padding:16px 0;
+  border-bottom:1px solid rgba(240,240,250,.06);
+  font-size:.82rem;
+  align-items:baseline;
+}
+.schedule-day{
+  font-weight:700;font-size:.7rem;
+  letter-spacing:.12em;
+  color:var(--vermillion);
+}
+.schedule-class{color:rgba(240,240,250,.6)}
+.schedule-time{color:rgba(240,240,250,.3);font-size:.75rem;text-align:right}
+
+/* ═══ INSTRUCTOR ═══ */
+.instructor{
+  background:url('karate2.jpg') center/cover no-repeat;
+}
+.instructor .kanji-mark{left:60%;top:20%}
+.instructor-grid{
+  display:grid;grid-template-columns:200px 1fr;
+  gap:48px;align-items:start;
+  margin-top:32px;
+}
+.instructor-placeholder{
+  width:100%;aspect-ratio:3/4;
+  background:rgba(240,240,250,.03);
+  border:1px solid rgba(240,240,250,.06);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;color:rgba(240,240,250,.2);
+}
+.instructor-name{
+  font-family:var(--font-display);
+  font-size:1.4rem;
+  letter-spacing:.04em;
+  margin-bottom:6px;
+}
+.instructor-role{
+  font-size:.7rem;
+  color:var(--vermillion);
+  letter-spacing:.12em;
+  margin-bottom:20px;
+}
+.instructor-bio{
+  font-size:.85rem;
+  color:rgba(240,240,250,.45);
+  line-height:2;
+  margin-bottom:24px;
+}
+.cred{list-style:none}
+.cred li{
+  font-size:.8rem;color:rgba(240,240,250,.35);
+  padding:8px 0;
+  border-bottom:1px solid rgba(240,240,250,.04);
+}
+.cred li:last-child{border-bottom:none}
+
+/* ═══ CONTACT ═══ */
+.contact{
+  background:url('karate3.jpg') center/cover no-repeat;
+}
+.contact .kanji-mark{left:10%;top:40%}
+.contact-grid{margin-top:24px}
+.contact-row{
+  display:grid;grid-template-columns:100px 1fr;gap:16px;
+  padding:12px 0;
+  border-bottom:1px solid rgba(240,240,250,.04);
+  font-size:.85rem;
+  align-items:baseline;
+}
+.contact-row:last-child{border-bottom:none}
+.contact-label{
+  font-size:.6rem;font-weight:700;
+  color:var(--vermillion);letter-spacing:.15em;
+}
+.contact-value{color:rgba(240,240,250,.5)}
+.contact-value a{color:rgba(240,240,250,.7)}
+.contact-value a:hover{color:var(--white)}
+
+/* ═══ FOOTER ═══ */
+.footer{
+  padding:48px;
+  text-align:center;
+  border-top:1px solid rgba(240,240,250,.04);
+}
+.footer-brand{
+  font-family:var(--font-display);
+  font-size:.75rem;
+  letter-spacing:.12em;
+  color:rgba(240,240,250,.3);
+}
+.footer-copy{
+  font-size:.55rem;
+  color:rgba(240,240,250,.12);
+  letter-spacing:.1em;
+  margin-top:8px;
+}
+
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-toggle{display:block}
+  .nav-links.open{
+    display:flex;flex-direction:column;
+    position:absolute;top:56px;left:0;right:0;
+    background:rgba(0,0,0,.95);padding:20px 32px;gap:16px;
+  }
+  .scene{padding:100px 24px 60px}
+  .training-grid{grid-template-columns:1fr;gap:32px}
+  .schedule-row{grid-template-columns:80px 1fr;gap:8px}
+  .schedule-time{grid-column:1/-1}
+  .instructor-grid{grid-template-columns:1fr;gap:24px}
+  .instructor-placeholder{max-width:180px}
+  .contact-row{grid-template-columns:1fr;gap:4px}
+  .footer{padding:32px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-brand">DOJO <span>·</span> 空手道場</a>
+  <button class="nav-toggle" id="navToggle" aria-label="MENU">☰</button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#training">Training</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#instructor">Instructor</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- I · Hero -->
+<section class="scene hero" id="about">
+  <div class="kanji-mark">道</div>
+  <div class="scene-inner">
+    <p class="hero-label">KARATE DOJO · EST. 20XX</p>
+    <h1 class="hero-title">正之道場</h1>
+    <p class="hero-sub">
+      一撃必殺。技術と精神を鍛え、<br>
+      心・技・体の調和を追究する空手道場。
+    </p>
+    <a href="#contact" class="ghost ghost--red">無料体験に申し込む</a>
+  </div>
+</section>
+
+<!-- II · Training -->
+<section class="scene training" id="training">
+  <div class="kanji-mark">技</div>
+  <div class="scene-inner">
+    <p class="scene-num">— II —</p>
+    <h2 class="scene-title">指導内容</h2>
+    <p class="scene-body">
+      基本から組手まで、段階に応じた指導。<br>
+      <strong>礼に始まり礼に終わる</strong> — それが空手の道。
+    </p>
+    <div class="training-grid">
+      <div class="training-item">
+        <h3 class="training-item-title"><span>01</span>基本稽古</h3>
+        <p class="training-item-body">立ち方、突き、蹴り。すべては基本から。正しい型を繰り返し、体に覚えさせる。</p>
+      </div>
+      <div class="training-item">
+        <h3 class="training-item-title"><span>02</span>型（カタ）</h3>
+        <p class="training-item-body">平安初段から最高級の型まで。一人でできる終身の修行。大会への準備も。</p>
+      </div>
+      <div class="training-item">
+        <h3 class="training-item-title"><span>03</span>組手（クミテ）</h3>
+        <p class="training-item-body">約束組手から自由組手へ。相手の動きを読み、瞬時に対応する力を養う。</p>
+      </div>
+      <div class="training-item">
+        <h3 class="training-item-title"><span>04</span>体力作り</h3>
+        <p class="training-item-body">空手に必要な筋力、柔軟性、持久力を総合的に鍛える。年齢に合わせた負荷で。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- III · Schedule -->
+<section class="scene schedule" id="schedule">
+  <div class="kanji-mark">心</div>
+  <div class="scene-inner">
+    <p class="scene-num">— III —</p>
+    <h2 class="scene-title">クラス・料金</h2>
+    <p class="scene-body">
+      入会金 <strong>¥10,000</strong> ／ 月謝制
+    </p>
+    <div class="schedule-table">
+      <div class="schedule-row">
+        <span class="schedule-day">幼児</span>
+        <span class="schedule-class">4歳〜6歳 ／ 月4回 45分</span>
+        <span class="schedule-time">¥6,000／月</span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">小学生</span>
+        <span class="schedule-class">小学1年〜6年 ／ 月4回 60分</span>
+        <span class="schedule-time">¥7,000／月</span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">中学生</span>
+        <span class="schedule-class">中学1年〜3年 ／ 月4回 60分</span>
+        <span class="schedule-time">¥8,000／月</span>
+      </div>
+      <div class="schedule-row">
+        <span class="schedule-day">一般</span>
+        <span class="schedule-class">高校生以上 ／ 月4回 60分</span>
+        <span class="schedule-time">¥9,000／月</span>
+      </div>
+    </div>
+    <p style="margin-top:24px;font-size:.72rem;color:rgba(240,240,250,.25);">
+      すべて税込み ／ 無料体験レッスンあり ／ 家族割引あり
+    </p>
+  </div>
+</section>
+
+<!-- IV · Instructor -->
+<section class="scene instructor" id="instructor">
+  <div class="kanji-mark">師</div>
+  <div class="scene-inner">
+    <p class="scene-num">— IV —</p>
+    <h2 class="scene-title">指導員</h2>
+    <div class="instructor-grid">
+      <div class="instructor-placeholder">指導員写真</div>
+      <div>
+        <h3 class="instructor-name">指導員名</h3>
+        <p class="instructor-role">正之道場 代表</p>
+        <p class="instructor-bio">
+          指導方針や経歴の紹介文が入ります。空手歴、段位、大会実績、指導年数など。
+        </p>
+        <ul class="cred">
+          <li>段位・資格</li>
+          <li>指導歴</li>
+          <li>大会実績</li>
+          <li>所属団体</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- V · Contact -->
+<section class="scene contact" id="contact">
+  <div class="kanji-mark">結</div>
+  <div class="scene-inner">
+    <p class="scene-num">— V —</p>
+    <h2 class="scene-title">お問い合わせ</h2>
+    <p class="scene-body">
+      見学・体験レッスン、お気軽にどうぞ。
+    </p>
+    <div class="contact-grid">
+      <div class="contact-row">
+        <span class="contact-label">ADDRESS</span>
+        <span class="contact-value">〒XXX-XXXX　〇〇県〇〇市...</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">PHONE</span>
+        <span class="contact-value"><a href="tel:090-XXXX-XXXX">090-XXXX-XXXX</a></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">SCHEDULE</span>
+        <span class="contact-value">月・水・金　17:00〜21:00</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">NOTE</span>
+        <span class="contact-value" style="font-size:.75rem;color:rgba(240,240,250,.25)">駐車場完備</span>
+      </div>
+    </div>
+    <div style="margin-top:36px">
+      <a href="tel:090-XXXX-XXXX" class="ghost ghost--red">無料体験に申し込む</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <p class="footer-brand">正之道場 · KARATE DOJO</p>
+  <p class="footer-copy">&copy; 正之道場</p>
+</footer>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20);
+},{passive:true});
+
+// Mobile menu
+const t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
+t.addEventListener('click',()=>{l.classList.toggle('open');t.textContent=l.classList.contains('open')?'✕':'☰'});
+l.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{l.classList.remove('open');t.textContent='☰'}));
+</script>
+</body>
+</html>
