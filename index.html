@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DOJO — 空手道場</title>
+<meta name="robots" content="noindex, nofollow">
+<title>空手道場</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;700;900&display=swap');
 
@@ -91,7 +92,7 @@ a:hover{color:var(--vermillion)}
 
 /* ═══ HERO ═══ */
 .hero{
-  background:url('karate.jpg') center/cover no-repeat;
+  background:url('IMG_1794.JPEG') center/cover no-repeat;
 }
 .hero .kanji-mark{right:-5%;top:50%;transform:translateY(-50%)}
 .hero-label{
@@ -164,7 +165,7 @@ a:hover{color:var(--vermillion)}
 
 /* ═══ TRAINING SECTION ═══ */
 .training{
-  background:url('karate1.jpg') center/cover no-repeat;
+  background:url('IMG_1815.JPEG') center/cover no-repeat;
 }
 .training .kanji-mark{left:-8%;top:30%}
 .training-grid{
@@ -217,7 +218,7 @@ a:hover{color:var(--vermillion)}
 
 /* ═══ INSTRUCTOR ═══ */
 .instructor{
-  background:url('karate2.jpg') center/cover no-repeat;
+  background:url('IMG_1909.JPEG') center/cover no-repeat;
 }
 .instructor .kanji-mark{left:60%;top:20%}
 .instructor-grid{
@@ -225,12 +226,10 @@ a:hover{color:var(--vermillion)}
   gap:48px;align-items:start;
   margin-top:32px;
 }
-.instructor-placeholder{
-  width:100%;aspect-ratio:3/4;
-  background:rgba(240,240,250,.03);
-  border:1px solid rgba(240,240,250,.06);
-  display:flex;align-items:center;justify-content:center;
-  font-size:.7rem;color:rgba(240,240,250,.2);
+.instructor-photo{
+  width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center;
+  border:1px solid rgba(240,240,250,.1);
+  filter:contrast(1.05) saturate(.95);
 }
 .instructor-name{
   font-family:var(--font-display);
@@ -260,7 +259,7 @@ a:hover{color:var(--vermillion)}
 
 /* ═══ CONTACT ═══ */
 .contact{
-  background:url('karate3.jpg') center/cover no-repeat;
+  background:url('IMG_1853.JPEG') center/cover no-repeat;
 }
 .contact .kanji-mark{left:10%;top:40%}
 .contact-grid{margin-top:24px}
@@ -299,6 +298,55 @@ a:hover{color:var(--vermillion)}
   margin-top:8px;
 }
 
+/* ═══ GALLERY ═══ */
+.gallery{
+  min-height:auto;align-items:flex-start;
+  padding:110px 48px 90px;
+  background:
+    radial-gradient(ellipse at 40% 30%,rgba(203,65,11,.04) 0%,transparent 45%),
+    #070707;
+}
+.gallery .kanji-mark{left:55%;top:-5%}
+.scene-inner--wide{max-width:1080px}
+.gallery-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:10px;margin-top:32px;
+}
+.gallery-item{
+  width:100%;aspect-ratio:4/3;object-fit:cover;
+  border:1px solid rgba(240,240,250,.08);
+  cursor:pointer;
+  filter:grayscale(.35) brightness(.82) contrast(1.02);
+  transition:transform .45s ease,filter .45s ease;
+}
+.gallery-item:hover{
+  transform:scale(1.035);
+  filter:grayscale(0) brightness(1) contrast(1);
+  z-index:2;
+}
+
+/* ═══ LIGHTBOX ═══ */
+.lightbox{
+  position:fixed;inset:0;z-index:200;
+  display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.93);
+  backdrop-filter:blur(8px);
+}
+.lightbox.open{display:flex}
+.lightbox img{
+  max-width:90vw;max-height:84vh;object-fit:contain;
+  border:1px solid rgba(240,240,250,.08);
+}
+.lightbox-close,.lightbox-nav{
+  position:absolute;background:none;border:none;cursor:pointer;
+  color:rgba(240,240,250,.55);line-height:1;
+  transition:color .3s;
+}
+.lightbox-close{top:22px;right:30px;font-size:1.6rem}
+.lightbox-nav{top:50%;transform:translateY(-50%);font-size:3rem;padding:0 26px}
+.lightbox-prev{left:0}.lightbox-next{right:0}
+.lightbox-close:hover,.lightbox-nav:hover{color:var(--white)}
+
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:768px){
   .nav-links{display:none}
@@ -313,7 +361,8 @@ a:hover{color:var(--vermillion)}
   .schedule-row{grid-template-columns:80px 1fr;gap:8px}
   .schedule-time{grid-column:1/-1}
   .instructor-grid{grid-template-columns:1fr;gap:24px}
-  .instructor-placeholder{max-width:180px}
+  .instructor-photo{max-width:220px}
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .contact-row{grid-template-columns:1fr;gap:4px}
   .footer{padding:32px 24px}
 }
@@ -330,6 +379,7 @@ a:hover{color:var(--vermillion)}
     <li><a href="#training">Training</a></li>
     <li><a href="#schedule">Schedule</a></li>
     <li><a href="#instructor">Instructor</a></li>
+    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -338,8 +388,8 @@ a:hover{color:var(--vermillion)}
 <section class="scene hero" id="about">
   <div class="kanji-mark">道</div>
   <div class="scene-inner">
-    <p class="hero-label">KARATE DOJO · EST. 20XX</p>
-    <h1 class="hero-title">正之道場</h1>
+    <p class="hero-label">KARATE DOJO</p>
+    <h1 class="hero-title">空手道場</h1>
     <p class="hero-sub">
       一撃必殺。技術と精神を鍛え、<br>
       心・技・体の調和を追究する空手道場。
@@ -365,7 +415,7 @@ a:hover{color:var(--vermillion)}
       </div>
       <div class="training-item">
         <h3 class="training-item-title"><span>02</span>型（カタ）</h3>
-        <p class="training-item-body">平安初段から最高級の型まで。一人でできる終身の修行。大会への準備も。</p>
+        <p class="training-item-body">平安初段から最高級の型まで。一人でできる終身の修行。</p>
       </div>
       <div class="training-item">
         <h3 class="training-item-title"><span>03</span>組手（クミテ）</h3>
@@ -386,6 +436,8 @@ a:hover{color:var(--vermillion)}
     <p class="scene-num">— III —</p>
     <h2 class="scene-title">クラス・料金</h2>
     <p class="scene-body">
+      毎週<strong>火・木</strong>　19:00〜20:00<br>
+      先生・会場の都合により<strong>不定休</strong><br>
       入会金 <strong>¥10,000</strong> ／ 月謝制
     </p>
     <div class="schedule-table">
@@ -423,29 +475,50 @@ a:hover{color:var(--vermillion)}
     <p class="scene-num">— IV —</p>
     <h2 class="scene-title">指導員</h2>
     <div class="instructor-grid">
-      <div class="instructor-placeholder">指導員写真</div>
+      <img class="instructor-photo" src="imura.jpg" alt="井村武憲 師範">
       <div>
-        <h3 class="instructor-name">指導員名</h3>
-        <p class="instructor-role">正之道場 代表</p>
+        <h3 class="instructor-name">井村 武憲</h3>
+        <p class="instructor-role">代表師範</p>
         <p class="instructor-bio">
-          指導方針や経歴の紹介文が入ります。空手歴、段位、大会実績、指導年数など。
+          空手は強くなるだけがすべてじゃない。礼にはじまり、礼に終わる。<br>
+          その繰り返しのなかで、技と一緒に人も育つ。<br>
+          子どもも大人も、いまの自分より少しだけ前へ。それを見守るのが道場だ。
         </p>
         <ul class="cred">
-          <li>段位・資格</li>
-          <li>指導歴</li>
-          <li>大会実績</li>
-          <li>所属団体</li>
+          <li>見学・体験、いつでもどうぞ</li>
+          <li>段位・経歴はお問い合わせください</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- V · Contact -->
+<!-- V · Gallery -->
+<section class="scene gallery" id="gallery">
+  <div class="kanji-mark">場</div>
+  <div class="scene-inner scene-inner--wide">
+    <p class="scene-num">— V —</p>
+    <h2 class="scene-title">道場の記録</h2>
+    <p class="scene-body">毎週火・木の稽古の風景。基本、型、組手。地道な積み重ね。</p>
+    <div class="gallery-grid">
+      <img class="gallery-item" src="IMG_1796.JPEG" alt="整列・開始" loading="lazy">
+      <img class="gallery-item" src="IMG_1863.JPEG" alt="基本の突き" loading="lazy">
+      <img class="gallery-item" src="IMG_1843.JPEG" alt="一斉稽古" loading="lazy">
+      <img class="gallery-item" src="IMG_1832.JPEG" alt="三人の基本" loading="lazy">
+      <img class="gallery-item" src="IMG_1879.JPEG" alt="約束組手" loading="lazy">
+      <img class="gallery-item" src="IMG_1816.JPEG" alt="立ちの指導" loading="lazy">
+      <img class="gallery-item" src="IMG_1858.JPEG" alt="構え" loading="lazy">
+      <img class="gallery-item" src="IMG_1798.JPEG" alt="親子稽古" loading="lazy">
+      <img class="gallery-item" src="IMG_1918.JPEG" alt="稽古風景" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- VI · Contact -->
 <section class="scene contact" id="contact">
   <div class="kanji-mark">結</div>
   <div class="scene-inner">
-    <p class="scene-num">— V —</p>
+    <p class="scene-num">— VI —</p>
     <h2 class="scene-title">お問い合わせ</h2>
     <p class="scene-body">
       見学・体験レッスン、お気軽にどうぞ。
@@ -461,11 +534,7 @@ a:hover{color:var(--vermillion)}
       </div>
       <div class="contact-row">
         <span class="contact-label">SCHEDULE</span>
-        <span class="contact-value">月・水・金　17:00〜21:00</span>
-      </div>
-      <div class="contact-row">
-        <span class="contact-label">NOTE</span>
-        <span class="contact-value" style="font-size:.75rem;color:rgba(240,240,250,.25)">駐車場完備</span>
+        <span class="contact-value">毎週火・木　19:00〜20:00（不定休）</span>
       </div>
     </div>
     <div style="margin-top:36px">
@@ -474,10 +543,18 @@ a:hover{color:var(--vermillion)}
   </div>
 </section>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lbClose" aria-label="閉じる">✕</button>
+  <button class="lightbox-nav lightbox-prev" id="lbPrev" aria-label="前へ">‹</button>
+  <img id="lightboxImg" src="" alt="拡大画像">
+  <button class="lightbox-nav lightbox-next" id="lbNext" aria-label="次へ">›</button>
+</div>
+
 <!-- Footer -->
 <footer class="footer">
-  <p class="footer-brand">正之道場 · KARATE DOJO</p>
-  <p class="footer-copy">&copy; 正之道場</p>
+  <p class="footer-brand">空手道場</p>
+  <p class="footer-copy">&copy; 道場</p>
 </footer>
 
 <script>
@@ -490,6 +567,25 @@ window.addEventListener('scroll',()=>{
 const t=document.getElementById('navToggle'),l=document.getElementById('navLinks');
 t.addEventListener('click',()=>{l.classList.toggle('open');t.textContent=l.classList.contains('open')?'✕':'☰'});
 l.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{l.classList.remove('open');t.textContent='☰'}));
+
+// Gallery lightbox
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lightboxImg');
+const gItems=[...document.querySelectorAll('.gallery-item')];
+let lbIndex=0;
+function openLb(i){lbIndex=i;lbImg.src=gItems[i].src;lbImg.alt=gItems[i].alt;lb.classList.add('open');lb.setAttribute('aria-hidden','false');}
+function closeLb(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');}
+function stepLb(d){lbIndex=(lbIndex+d+gItems.length)%gItems.length;lbImg.src=gItems[lbIndex].src;lbImg.alt=gItems[lbIndex].alt;}
+gItems.forEach((it,i)=>it.addEventListener('click',()=>openLb(i)));
+document.getElementById('lbClose').addEventListener('click',closeLb);
+document.getElementById('lbPrev').addEventListener('click',()=>stepLb(-1));
+document.getElementById('lbNext').addEventListener('click',()=>stepLb(1));
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+document.addEventListener('keydown',e=>{
+  if(!lb.classList.contains('open'))return;
+  if(e.key==='Escape')closeLb();
+  if(e.key==='ArrowLeft')stepLb(-1);
+  if(e.key==='ArrowRight')stepLb(1);
+});
 </script>
 </body>
 </html>
