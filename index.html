@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>空手道場</title>
+<title>日本空手協会 府中東支部</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;300;400;500;700&display=swap');
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -18,7 +18,7 @@ html{scroll-behavior:smooth}
   --ghost-border:rgba(240,240,250,.35);
   --overlay:rgba(0,0,0,.55);
   --vermillion:#CB410B;
-  --font-display:"Dela Gothic One","Noto Sans JP",sans-serif;
+  --font-display:"Noto Sans JP","Hiragino Sans",sans-serif;
   --font-body:"Noto Sans JP","Hiragino Sans",sans-serif;
 }
 
@@ -45,8 +45,8 @@ a:hover{color:var(--vermillion)}
 .nav.scrolled{background:rgba(0,0,0,.85)}
 .nav-brand{
   font-family:var(--font-display);
-  font-size:.85rem;color:var(--white);
-  letter-spacing:.12em;
+  font-size:.8rem;font-weight:500;color:var(--white);
+  letter-spacing:.14em;
 }
 .nav-brand span{color:var(--vermillion)}
 .nav-links{display:flex;gap:32px;list-style:none}
@@ -78,10 +78,20 @@ a:hover{color:var(--vermillion)}
 }
 .scene-inner{position:relative;z-index:2;max-width:960px}
 
+/* 写真背景のセクションは文字側を強めに落として可読性を確保 */
+.instructor::before,
+.contact::before{
+  background:linear-gradient(100deg,
+    rgba(0,0,0,.9) 0%,
+    rgba(0,0,0,.82) 42%,
+    rgba(0,0,0,.5) 100%);
+}
+
 /* ═══ KANJI WATERMARK ═══ */
 .kanji-mark{
   position:absolute;
-  font-family:"Dela Gothic One",sans-serif;
+  font-family:var(--font-display);
+  font-weight:500;
   font-size:clamp(12rem,30vw,28rem);
   color:rgba(240,240,250,.03);
   line-height:1;
@@ -103,11 +113,19 @@ a:hover{color:var(--vermillion)}
 }
 .hero-title{
   font-family:var(--font-display);
-  font-size:clamp(2.5rem,7vw,5rem);
-  line-height:1;
-  letter-spacing:.06em;
+  font-weight:300;
+  font-size:clamp(2rem,5.5vw,3.8rem);
+  line-height:1.15;
+  letter-spacing:.14em;
   color:var(--white);
   margin-bottom:12px;
+}
+.hero-title-org{
+  display:block;
+  font-size:.42em;font-weight:400;
+  letter-spacing:.3em;
+  color:rgba(240,240,250,.55);
+  margin-bottom:.5em;
 }
 .hero-sub{
   font-size:.85rem;
@@ -149,9 +167,10 @@ a:hover{color:var(--vermillion)}
 }
 .scene-title{
   font-family:var(--font-display);
-  font-size:clamp(1.8rem,4vw,3rem);
-  line-height:1.1;
-  letter-spacing:.04em;
+  font-weight:300;
+  font-size:clamp(1.6rem,3.4vw,2.6rem);
+  line-height:1.25;
+  letter-spacing:.12em;
   color:var(--white);
   margin-bottom:32px;
 }
@@ -175,8 +194,9 @@ a:hover{color:var(--vermillion)}
 .training-item{}
 .training-item-title{
   font-family:var(--font-display);
+  font-weight:500;
   font-size:1rem;
-  letter-spacing:.06em;
+  letter-spacing:.1em;
   margin-bottom:8px;
 }
 .training-item-title span{
@@ -196,25 +216,31 @@ a:hover{color:var(--vermillion)}
     #0a0a0a;
 }
 .schedule .kanji-mark{right:-10%;bottom:10%}
-.schedule-table{
+.fee{
   margin-top:32px;
   border-top:1px solid rgba(240,240,250,.08);
+  max-width:420px;
 }
-.schedule-row{
-  display:grid;grid-template-columns:120px 1fr 140px;
-  gap:16px;
-  padding:16px 0;
+.fee-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  gap:24px;padding:16px 0;
   border-bottom:1px solid rgba(240,240,250,.06);
-  font-size:.82rem;
-  align-items:baseline;
 }
-.schedule-day{
-  font-weight:700;font-size:.7rem;
-  letter-spacing:.12em;
+.fee-label{
+  font-size:.7rem;font-weight:500;
+  letter-spacing:.14em;
   color:var(--vermillion);
 }
-.schedule-class{color:rgba(240,240,250,.6)}
-.schedule-time{color:rgba(240,240,250,.3);font-size:.75rem;text-align:right}
+.fee-value{
+  font-size:.95rem;
+  letter-spacing:.06em;
+  color:rgba(240,240,250,.8);
+}
+.fee-note{
+  margin-top:20px;
+  font-size:.75rem;line-height:1.9;
+  color:rgba(240,240,250,.35);
+}
 
 /* ═══ INSTRUCTOR ═══ */
 .instructor{
@@ -233,8 +259,9 @@ a:hover{color:var(--vermillion)}
 }
 .instructor-name{
   font-family:var(--font-display);
-  font-size:1.4rem;
-  letter-spacing:.04em;
+  font-weight:400;
+  font-size:1.3rem;
+  letter-spacing:.1em;
   margin-bottom:6px;
 }
 .instructor-role{
@@ -308,7 +335,7 @@ a:hover{color:var(--vermillion)}
   display:inline-block;
   margin-top:6px;
   font-size:.75rem;
-  color:rgba(203,65,11,.85);
+  color:#e8794f;
 }
 
 /* ═══ FOOTER ═══ */
@@ -332,8 +359,9 @@ a:hover{color:var(--vermillion)}
 }
 .footer-brand{
   font-family:var(--font-display);
-  font-size:.75rem;
-  letter-spacing:.12em;
+  font-weight:500;
+  font-size:.72rem;
+  letter-spacing:.14em;
   color:rgba(240,240,250,.3);
 }
 .footer-copy{
@@ -403,8 +431,6 @@ a:hover{color:var(--vermillion)}
   }
   .scene{padding:100px 24px 60px}
   .training-grid{grid-template-columns:1fr;gap:32px}
-  .schedule-row{grid-template-columns:80px 1fr;gap:8px}
-  .schedule-time{grid-column:1/-1}
   .instructor-grid{grid-template-columns:1fr;gap:24px}
   .instructor-photo{max-width:220px}
   .record-row{grid-template-columns:46px 1fr auto;gap:10px}
@@ -419,7 +445,7 @@ a:hover{color:var(--vermillion)}
 
 <!-- Nav -->
 <nav class="nav" id="nav">
-  <a href="#" class="nav-brand">DOJO <span>·</span> 空手道場</a>
+  <a href="#" class="nav-brand">日本空手協会 <span>·</span> 府中東支部</a>
   <button class="nav-toggle" id="navToggle" aria-label="MENU">☰</button>
   <ul class="nav-links" id="navLinks">
     <li><a href="#about">About</a></li>
@@ -436,7 +462,7 @@ a:hover{color:var(--vermillion)}
   <div class="kanji-mark">道</div>
   <div class="scene-inner">
     <p class="hero-label">KARATE DOJO</p>
-    <h1 class="hero-title">空手道場</h1>
+    <h1 class="hero-title"><span class="hero-title-org">日本空手協会</span>府中東支部</h1>
     <p class="hero-sub">
       一撃必殺。技術と精神を鍛え、<br>
       心・技・体の調和を追究する空手道場。
@@ -481,36 +507,26 @@ a:hover{color:var(--vermillion)}
   <div class="kanji-mark">心</div>
   <div class="scene-inner">
     <p class="scene-num">— III —</p>
-    <h2 class="scene-title">クラス・料金</h2>
+    <h2 class="scene-title">稽古日時・費用</h2>
     <p class="scene-body">
       毎週<strong>火・木</strong>　19:00〜20:00<br>
-      先生・会場の都合により<strong>不定休</strong><br>
-      入会金 <strong>¥10,000</strong> ／ 月謝制
+      先生・会場の都合により<strong>不定休</strong>
     </p>
-    <div class="schedule-table">
-      <div class="schedule-row">
-        <span class="schedule-day">幼児</span>
-        <span class="schedule-class">4歳〜6歳 ／ 月4回 45分</span>
-        <span class="schedule-time">¥6,000／月</span>
+    <div class="fee">
+      <div class="fee-row">
+        <span class="fee-label">入会金</span>
+        <span class="fee-value">¥xx,xxx</span>
       </div>
-      <div class="schedule-row">
-        <span class="schedule-day">小学生</span>
-        <span class="schedule-class">小学1年〜6年 ／ 月4回 60分</span>
-        <span class="schedule-time">¥7,000／月</span>
-      </div>
-      <div class="schedule-row">
-        <span class="schedule-day">中学生</span>
-        <span class="schedule-class">中学1年〜3年 ／ 月4回 60分</span>
-        <span class="schedule-time">¥8,000／月</span>
-      </div>
-      <div class="schedule-row">
-        <span class="schedule-day">一般</span>
-        <span class="schedule-class">高校生以上 ／ 月4回 60分</span>
-        <span class="schedule-time">¥9,000／月</span>
+      <div class="fee-row">
+        <span class="fee-label">月謝</span>
+        <span class="fee-value">月 ¥xx,xxx</span>
       </div>
     </div>
-    <p style="margin-top:24px;font-size:.72rem;color:rgba(240,240,250,.25);">
-      すべて税込み ／ 無料体験レッスンあり ／ 家族割引あり
+    <p class="fee-note">
+      日本空手協会への入会や昇級・昇段審査には別途、所定の費用がかかります。
+    </p>
+    <p style="margin-top:20px;font-size:.72rem;color:rgba(240,240,250,.25);">
+      見学・無料体験あり
     </p>
   </div>
 </section>
@@ -599,15 +615,18 @@ a:hover{color:var(--vermillion)}
         </span>
       </div>
       <div class="contact-row">
+        <span class="contact-label">ACCESS</span>
+        <span class="contact-value">
+          西武多摩川線　多磨駅から徒歩10分ほど<br>
+          京王線　飛田給駅から徒歩20分ほど
+        </span>
+      </div>
+      <div class="contact-row">
         <span class="contact-label">PARKING</span>
         <span class="contact-value">
           駐車場・駐輪場あり<br>
           <span class="contact-note">駐車場への入り口が分かりにくいのでご注意ください</span>
         </span>
-      </div>
-      <div class="contact-row">
-        <span class="contact-label">PHONE</span>
-        <span class="contact-value"><a href="tel:090-XXXX-XXXX">090-XXXX-XXXX</a></span>
       </div>
       <div class="contact-row">
         <span class="contact-label">SCHEDULE</span>
@@ -631,7 +650,7 @@ a:hover{color:var(--vermillion)}
 <!-- Footer -->
 <footer class="footer">
   <a class="text-link" href="https://script.google.com/macros/s/AKfycbw72yazV73uIYayprV_umiUFVsRGACtrjQ9kdfCt8IwMpI_eK_9fbGkC0mN_4pP0Hf_qA/exec" target="_blank" rel="noopener">お問い合わせフォーム</a>
-  <p class="footer-brand">空手道場</p>
+  <p class="footer-brand">日本空手協会　府中東支部</p>
   <p class="footer-copy">&copy; 道場</p>
 </footer>
 
