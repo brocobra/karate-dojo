@@ -257,6 +257,25 @@ a:hover{color:var(--vermillion)}
 }
 .cred li:last-child{border-bottom:none}
 
+.record{margin-bottom:28px}
+.record-head{
+  font-size:.7rem;letter-spacing:.16em;
+  color:var(--vermillion);
+  margin:22px 0 10px;
+}
+.record-head:first-child{margin-top:0}
+.record-list{list-style:none}
+.record-row{
+  display:grid;grid-template-columns:58px 1fr auto;
+  gap:14px;align-items:baseline;
+  padding:7px 0;
+  border-bottom:1px solid rgba(240,240,250,.04);
+}
+.record-row:last-child{border-bottom:none}
+.record-year{font-size:.75rem;color:rgba(240,240,250,.35);letter-spacing:.04em}
+.record-event{font-size:.8rem;color:rgba(240,240,250,.55)}
+.record-result{font-size:.75rem;color:var(--white);letter-spacing:.1em;white-space:nowrap}
+
 /* ═══ CONTACT ═══ */
 .contact{
   background:url('IMG_1853.JPEG') center/cover no-repeat;
@@ -284,6 +303,22 @@ a:hover{color:var(--vermillion)}
   padding:48px;
   text-align:center;
   border-top:1px solid rgba(240,240,250,.04);
+}
+.footer-contact{
+  display:inline-block;
+  margin-bottom:28px;
+  padding:12px 32px;
+  font-size:.7rem;font-weight:700;
+  letter-spacing:.14em;
+  color:var(--white);
+  border:1px solid var(--ghost-border);
+  border-radius:32px;
+  transition:all .3s;
+}
+.footer-contact:hover{
+  color:var(--white);
+  background:var(--vermillion);
+  border-color:var(--vermillion);
 }
 .footer-brand{
   font-family:var(--font-display);
@@ -362,6 +397,8 @@ a:hover{color:var(--vermillion)}
   .schedule-time{grid-column:1/-1}
   .instructor-grid{grid-template-columns:1fr;gap:24px}
   .instructor-photo{max-width:220px}
+  .record-row{grid-template-columns:46px 1fr auto;gap:10px}
+  .record-event{font-size:.75rem}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .contact-row{grid-template-columns:1fr;gap:4px}
   .footer{padding:32px 24px}
@@ -477,16 +514,32 @@ a:hover{color:var(--vermillion)}
     <div class="instructor-grid">
       <img class="instructor-photo" src="imura.jpg" alt="井村武憲 師範">
       <div>
-        <h3 class="instructor-name">井村 武憲</h3>
-        <p class="instructor-role">代表師範</p>
+        <h3 class="instructor-name">師範　井村 武憲</h3>
+        <p class="instructor-role">日本空手協会 総本部師範 ／ 八段</p>
         <p class="instructor-bio">
           空手は強くなるだけがすべてじゃない。礼にはじまり、礼に終わる。<br>
           その繰り返しのなかで、技と一緒に人も育つ。<br>
           子どもも大人も、いまの自分より少しだけ前へ。それを見守るのが道場だ。
         </p>
+        <div class="record">
+          <p class="record-head">世界大会</p>
+          <ul class="record-list">
+              <li class="record-row"><span class="record-year">1987</span><span class="record-event">第2回 松濤杯世界大会　個人形の部</span><span class="record-result">優勝</span></li>
+              <li class="record-row"><span class="record-year">1994</span><span class="record-event">第5回 松濤杯世界大会　個人形の部</span><span class="record-result">優勝</span></li>
+              <li class="record-row"><span class="record-year">1996</span><span class="record-event">第6回 松濤杯世界大会　個人形の部</span><span class="record-result">優勝</span></li>
+          </ul>
+          <p class="record-head">全国大会</p>
+          <ul class="record-list">
+              <li class="record-row"><span class="record-year">1992</span><span class="record-event">第35回 全国空手道選手権大会　個人形の部</span><span class="record-result">優勝</span></li>
+              <li class="record-row"><span class="record-year">1993</span><span class="record-event">第36回 全国空手道選手権大会　個人形の部</span><span class="record-result">優勝</span></li>
+              <li class="record-row"><span class="record-year">1994</span><span class="record-event">第37回 全国空手道選手権大会　個人形の部</span><span class="record-result">優勝</span></li>
+              <li class="record-row"><span class="record-year">1995</span><span class="record-event">第38回 全国空手道選手権大会　個人形の部</span><span class="record-result">優勝</span></li>
+              <li class="record-row"><span class="record-year">1996</span><span class="record-event">第39回 全国空手道選手権大会　個人形の部</span><span class="record-result">優勝</span></li>
+          </ul>
+        </div>
+
         <ul class="cred">
           <li>見学・体験、いつでもどうぞ</li>
-          <li>段位・経歴はお問い合わせください</li>
         </ul>
       </div>
     </div>
@@ -553,6 +606,7 @@ a:hover{color:var(--vermillion)}
 
 <!-- Footer -->
 <footer class="footer">
+  <a class="footer-contact" href="https://script.google.com/macros/s/AKfycbw72yazV73uIYayprV_umiUFVsRGACtrjQ9kdfCt8IwMpI_eK_9fbGkC0mN_4pP0Hf_qA/exec" target="_blank" rel="noopener">お問い合わせフォーム</a>
   <p class="footer-brand">空手道場</p>
   <p class="footer-copy">&copy; 道場</p>
 </footer>
