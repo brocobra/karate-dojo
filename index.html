@@ -82,7 +82,8 @@ a:hover{color:var(--vermillion)}
 .training::before{background:rgba(0,0,0,.74)}
 .hero::before,
 .instructor::before,
-.contact::before{
+.contact::before,
+.schedule::before{
   background:linear-gradient(100deg,
     rgba(0,0,0,.9) 0%,
     rgba(0,0,0,.82) 42%,
@@ -213,9 +214,7 @@ a:hover{color:var(--vermillion)}
 
 /* ═══ SCHEDULE ═══ */
 .schedule{
-  background:
-    radial-gradient(ellipse at 60% 40%,rgba(203,65,11,.03) 0%,transparent 40%),
-    #0a0a0a;
+  background:url('keiko_seiza_karate.jpeg') center 42%/cover no-repeat;
 }
 .schedule .kanji-mark{right:-10%;bottom:10%}
 .fee{
@@ -394,6 +393,11 @@ a:hover{color:var(--vermillion)}
   filter:grayscale(.35) brightness(.82) contrast(1.02);
   transition:transform .45s ease,filter .45s ease;
 }
+.gallery-item--wide{
+  grid-column:1 / -1;
+  aspect-ratio:21/9;
+  object-position:center 45%;
+}
 .gallery-item:hover{
   transform:scale(1.035);
   filter:grayscale(0) brightness(1) contrast(1);
@@ -438,6 +442,7 @@ a:hover{color:var(--vermillion)}
   .record-row{grid-template-columns:46px 1fr auto;gap:10px}
   .record-event{font-size:.75rem}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-item--wide{aspect-ratio:16/9}
   .contact-row{grid-template-columns:1fr;gap:4px}
   .footer{padding:32px 24px}
 }
@@ -582,6 +587,7 @@ a:hover{color:var(--vermillion)}
     <h2 class="scene-title">道場の記録</h2>
     <p class="scene-body">毎週火・木の稽古の風景。基本、型、組手。地道な積み重ね。</p>
     <div class="gallery-grid">
+      <img class="gallery-item gallery-item--wide" src="keiko_seiza_karate.jpeg" alt="正座・黙想">
       <img class="gallery-item" src="S__5210124_0.jpg" alt="型の稽古" loading="lazy">
       <img class="gallery-item" src="S__5210123_0.jpg" alt="全体稽古" loading="lazy">
       <img class="gallery-item" src="S__5210121_0.jpg" alt="道場全景" loading="lazy">
